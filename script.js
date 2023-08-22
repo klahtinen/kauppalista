@@ -1,30 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
     const itemInput = document.getElementById("item");
-    const addButton = document.getElementById("addButton");
     const itemList = document.getElementById("itemList");
 
-    addButton.addEventListener("click", function () {
-        const itemName = itemInput.value.trim();
-        if (itemName !== "") {
-            const listItem = document.createElement("li");
+    // Function to add a new item to the list and save the list
+    function addItemAndSave(itemName) {
+        const listItem = document.createElement("li");
 
-            // Lisätään checkbox ja tuotteen nimi
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            listItem.appendChild(checkbox);
-            const label = document.createElement("label");
-            label.textContent = itemName;
-            listItem.appendChild(label);
+        // Create a label for the item name (clickable)
+        const label = document.createElement("label");
+        label.textContent = itemName;
 
-            // Checkboxin toiminnallisuus poistaa tuotteen
-            checkbox.addEventListener("change", function () {
-                if (checkbox.checked) {
-                    listItem.remove();
-                }
-            });
+        // Append the label to the list item
+        listItem.appendChild(label);
 
-            itemList.appendChild(listItem);
-            itemInput.value = "";
+        // Add an event listener to the list item to remove it when clicked
+        listItem.addEventListener("click", function () {
+            listItem.remove();
+            saveShoppingList(); // Save the list when an item is removed
+        });
+
+        // Append the list item to the shopping list
+        itemList.appendChild(listItem);
+
+        saveShoppingList(); // Save the list when an item is added
+    }
+
+    // Function to save the shopping list to local storage
+    function saveShoppingList() {
+        const listItems = Array.from(itemList.getElementsByTagName("li"));
+        const shoppingList = listItems.map(function (listItem) {
+            return listItem.textContent; // Use textContent to get the label text
+        });
+
+        localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+    }
+
+    // Load the shopping list from local storage on page load
+    const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
+    savedList.forEach(addItemAndSave);
+
+    // Event listener for pressing the Enter key in the input field
+    itemInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            const itemName = itemInput.value.trim();
+            if (itemName !== "") {
+                addItemAndSave(itemName);
+                itemInput.value = "";
+            }
         }
     });
 });

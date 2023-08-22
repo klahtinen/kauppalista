@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #F7F7F7; /* Light grayish background */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: #333; /* Dark gray top bar */
+    color: #FFF; /* White text */
     text-align: center;
     padding: 1em;
 }
@@ -25,16 +25,8 @@ input[type="text"] {
     border: none;
     border-radius: 4px;
     margin-bottom: 0.5em;
-}
-
-button {
-    padding: 0.5em 1em;
-    font-size: 1em;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #FFF; /* White input background */
+    border: 1px solid #DDD; /* Light gray border */
 }
 
 ul {
@@ -43,16 +35,21 @@ ul {
 }
 
 li {
-    background-color: white;
+    background-color: #FFF; /* White list items */
     padding: 0.5em;
     margin: 0.5em 0;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    justify-content: center;
+    color: #333; /* Dark gray text color */
 }
 
-/* Lisätään media query tablet- ja mobiilinäkymille */
+/* Media query for mobile devices */
 @media (max-width: 768px) {
     .container {
         margin: 0.5em;
