@@ -53,18 +53,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Voice recognition functionality
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition)();
-    recognition.lang = 'fi-FI';
+    // Voice recognition functionality using annyang
+    if (annyang) {
+        annyang.setLanguage('fi-FI');
 
-    recognition.onresult = function (event) {
-        const result = event.results[0][0].transcript;
-        if (result.trim() !== "") {
-            addItemAndSave(result.trim());
-        }
-    };
+        const commands = {
+            'lisää *item': function (item) {
+                if (item.trim() !== "") {
+                    addItemAndSave(item.trim());
+                }
+            }
+        };
+
+        annyang.addCommands(commands);
+        annyang.start();
+    }
 
     voiceButton.addEventListener("click", function () {
-        recognition.start();
+        annyang.start();
     });
 });
