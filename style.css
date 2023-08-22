@@ -1,15 +1,16 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #F7F7F7; /* Light grayish background */
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #333; /* Dark gray top bar */
-    color: #FFF; /* White text */
+    background-color: #333;
+    color: white;
     text-align: center;
     padding: 1em;
+    font-size: 1.5em;
 }
 
 .container {
@@ -25,8 +26,17 @@ input[type="text"] {
     border: none;
     border-radius: 4px;
     margin-bottom: 0.5em;
-    background-color: #FFF; /* White input background */
-    border: 1px solid #DDD; /* Light gray border */
+    text-align: center; /* Center the text */
+}
+
+button {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 ul {
@@ -35,21 +45,19 @@ ul {
 }
 
 li {
-    background-color: #FFF; /* White list items */
+    background-color: white;
     padding: 0.5em;
     margin: 0.5em 0;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     text-transform: uppercase;
-    justify-content: center;
-    color: #333; /* Dark gray text color */
+    text-align: center; /* Center the text */
 }
 
-/* Media query for mobile devices */
+/* Lisätään media query tablet- ja mobiilinäkymille */
 @media (max-width: 768px) {
     .container {
         margin: 0.5em;

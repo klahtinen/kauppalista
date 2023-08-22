@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const itemInput = document.getElementById("item");
     const itemList = document.getElementById("itemList");
-    const voiceButton = document.getElementById("voiceButton"); // Add this line
+    const voiceButton = document.getElementById("voiceButton");
 
     // Function to add a new item to the list and save the list
     function addItemAndSave(itemName) {
@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
         itemList.appendChild(listItem);
 
         saveShoppingList(); // Save the list when an item is added
+
+        // Clear the text input box
+        itemInput.value = "";
     }
 
     // Function to save the shopping list to local storage
@@ -46,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const itemName = itemInput.value.trim();
             if (itemName !== "") {
                 addItemAndSave(itemName);
-                itemInput.value = "";
             }
         }
     });
@@ -54,12 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Voice recognition functionality
     voiceButton.addEventListener("click", function () {
         const recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
-        recognition.lang = 'fi-FI'; // Set the language for recognition
+        recognition.lang = 'fi-FI';
 
         recognition.onresult = function (event) {
             const result = event.results[0][0].transcript;
-            itemInput.value = result.trim();
-            addItemAndSave(result.trim());
+            if (result.trim() !== "") {
+                addItemAndSave(result.trim());
+            }
         };
 
         recognition.start();
