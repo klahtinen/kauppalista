@@ -54,17 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Voice recognition functionality
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition)();
+    recognition.lang = 'fi-FI';
+
+    recognition.onresult = function (event) {
+        const result = event.results[0][0].transcript;
+        if (result.trim() !== "") {
+            addItemAndSave(result.trim());
+        }
+    };
+
     voiceButton.addEventListener("click", function () {
-        const recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
-        recognition.lang = 'fi-FI';
-
-        recognition.onresult = function (event) {
-            const result = event.results[0][0].transcript;
-            if (result.trim() !== "") {
-                addItemAndSave(result.trim());
-            }
-        };
-
         recognition.start();
     });
 });
